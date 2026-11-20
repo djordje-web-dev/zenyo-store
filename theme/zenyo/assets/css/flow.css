@@ -1,0 +1,294 @@
+/* ==========================================================================
+   Korpa, naplata i stranica "Hvala".
+   WooCommerce-ove podrazumevane stilove smo iskljucili (inc/checkout.php), pa je ovde sve sto treba.
+   ========================================================================== */
+
+.zy-flow { padding-bottom: 8px; }
+.zy-flow__head {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
+  padding: 8px var(--zy-gutter) 0;
+}
+.zy-flow__head h1 {
+  margin: 0;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 30px; line-height: 1.1; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.zy-flow__dash { width: 48px; height: 4px; background: var(--zy-red); }
+.zy-flow__rule { height: 1px; margin: 0 var(--zy-gutter); background: var(--zy-line); }
+.zy-flow__empty {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
+  padding: 36px var(--zy-gutter) 96px;
+}
+.zy-flow__empty p { margin: 0; font-size: 16px; color: rgba(10, 10, 10, 0.75); }
+
+/* ---------- Poruke (greske, obavestenja) ---------- */
+.woocommerce-notices-wrapper:empty { display: none; }
+.woocommerce-error, .woocommerce-message, .woocommerce-info {
+  list-style: none; margin: 24px var(--zy-gutter) 0; padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.6); border: 1px solid var(--zy-line); border-left: 3px solid var(--zy-ink);
+  font-size: 14px; line-height: 1.5;
+}
+.woocommerce-error { border-left-color: var(--zy-red); }
+.woocommerce-error li + li { margin-top: 4px; }
+.woocommerce-message a.button, .woocommerce-info a.button { margin-right: 12px; font-weight: 600; }
+.zy-checkout .woocommerce-NoticeGroup { grid-column: 1 / -1; }
+.zy-checkout .woocommerce-NoticeGroup .woocommerce-error { margin: 0 0 24px; }
+
+/* ---------- Kutija sa pregledom (korpa, naplata, "Hvala") ---------- */
+.zy-summary { padding: 22px 24px 24px; background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(10, 10, 10, 0.1); }
+.zy-summary--sticky { position: sticky; top: 24px; }
+.zy-summary__title {
+  margin: 0; padding-bottom: 14px; border-bottom: 1px solid rgba(10, 10, 10, 0.14);
+  font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.zy-summary__cols {
+  display: grid; grid-template-columns: minmax(0, 1fr) 44px 112px;
+  padding: 12px 0 8px; border-bottom: 1px solid var(--zy-line);
+  font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--zy-ink-60);
+}
+.zy-summary__cols span:nth-child(2) { text-align: center; }
+.zy-summary__cols span:nth-child(3) { text-align: right; }
+.zy-summary__lines { margin: 0; padding: 0; list-style: none; }
+.zy-summary__line {
+  display: grid; grid-template-columns: minmax(0, 1fr) 44px 112px; align-items: start;
+  padding: 10px 0; border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+}
+.zy-summary__product { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.zy-summary__name { font-size: 12px; font-weight: 600; line-height: 1.35; letter-spacing: 0.06em; text-transform: uppercase; }
+.zy-summary__variant { font-size: 12px; color: var(--zy-ink-60); }
+.zy-summary__qty { text-align: center; font-size: 13px; font-weight: 600; }
+.zy-summary__total { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font-size: 13px; font-weight: 600; }
+.zy-summary__calc { font-size: 11px; font-weight: 400; color: rgba(10, 10, 10, 0.55); }
+
+.zy-summary__rows {
+  margin: 0; padding: 14px 0; display: flex; flex-direction: column; gap: 10px;
+  border-bottom: 1px solid rgba(10, 10, 10, 0.14); font-size: 13px;
+}
+.zy-summary__rows div { display: flex; justify-content: space-between; gap: 16px; }
+.zy-summary__rows dt { color: rgba(10, 10, 10, 0.75); }
+.zy-summary__rows dd { margin: 0; font-weight: 600; }
+.zy-summary__grand { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 16px 0; }
+.zy-summary__grand--last { padding-bottom: 0; }
+.zy-summary__grand > span:first-child { font-size: 18px; font-weight: 600; }
+.zy-summary__amount {
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 22px; line-height: 1; letter-spacing: 0.02em; white-space: nowrap;
+}
+.zy-summary__btn {
+  width: 100%; height: 52px; padding: 0 24px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--zy-taupe); color: var(--zy-white); border: none; border-radius: 0; cursor: pointer;
+  font-family: var(--zy-font-ui); font-size: 13px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
+  transition: background 200ms ease;
+}
+.zy-summary__btn:hover { background: var(--zy-taupe-dark); color: var(--zy-white); }
+.zy-summary__btn--inline { width: auto; display: inline-flex; padding: 0 40px; }
+.zy-summary .place-order { margin: 0; padding: 0; }
+
+/* ---------- Brojac kolicine ---------- */
+.zy-stepper {
+  display: inline-flex; align-items: center; height: 40px;
+  border: 1px solid rgba(10, 10, 10, 0.3); background: rgba(255, 255, 255, 0.35);
+}
+.zy-stepper button {
+  width: 40px; height: 38px; display: flex; align-items: center; justify-content: center;
+  padding: 0; background: none; border: none; color: var(--zy-ink); cursor: pointer;
+}
+.zy-stepper button:disabled { color: rgba(10, 10, 10, 0.3); cursor: not-allowed; }
+.zy-stepper input.qty {
+  width: 40px; height: 38px; padding: 0; border: none; background: none; text-align: center;
+  font-family: var(--zy-font-ui); font-size: 14px; font-weight: 600; color: var(--zy-ink);
+  -moz-appearance: textfield; appearance: textfield;
+}
+.zy-stepper input.qty::-webkit-outer-spin-button,
+.zy-stepper input.qty::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* ---------- Korpa ---------- */
+.zy-cartx {
+  display: grid; grid-template-columns: minmax(0, 65fr) minmax(0, 30fr); column-gap: 5%; align-items: start;
+  padding: 40px var(--zy-gutter) 56px;
+}
+.zy-cartx__cols, .zy-cartx__row {
+  display: grid; grid-template-columns: minmax(0, 1fr) 130px 150px 120px; align-items: center;
+}
+.zy-cartx__cols {
+  padding-bottom: 12px; border-bottom: 1px solid rgba(10, 10, 10, 0.14);
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(10, 10, 10, 0.7);
+}
+.zy-cartx__cols span:last-child { text-align: right; }
+.zy-cartx__list { margin: 0; padding: 0; list-style: none; }
+.zy-cartx__row { padding: 18px 0; border-bottom: 1px solid var(--zy-line); }
+.zy-cartx__product { display: flex; align-items: center; gap: 22px; min-width: 0; }
+.zy-cartx__thumb { flex-shrink: 0; width: 92px; height: 68px; overflow: hidden; background: #e9e1d6; }
+.zy-cartx__thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.zy-cartx__info { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; }
+.zy-cartx__name {
+  font-size: 13px; font-weight: 600; line-height: 1.35; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--zy-ink); text-decoration: none;
+}
+.zy-cartx__variant { font-size: 12px; letter-spacing: 0.04em; color: var(--zy-ink-60); }
+.zy-cartx__remove { font-size: 12px; color: var(--zy-ink-60); text-decoration: underline; text-underline-offset: 3px; }
+.zy-cartx__remove:hover { color: var(--zy-ink); }
+.zy-cartx__price, .zy-cartx__total { font-size: 13px; font-weight: 600; letter-spacing: 0.02em; }
+.zy-cartx__total { text-align: right; }
+.zy-cartx__back { padding-top: 14px; }
+.zy-cartx__back a {
+  display: inline-flex; align-items: center; gap: 12px; min-height: 44px; text-decoration: none;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(10, 10, 10, 0.75);
+  transition: color 200ms ease;
+}
+.zy-cartx__back a svg { transition: transform 300ms ease; }
+.zy-cartx__back a:hover { color: var(--zy-ink); }
+.zy-cartx__back a:hover svg { transform: translateX(-4px); }
+/* Dok WooCommerce osvezava korpu, stavlja preko nje poluprovidan sloj. */
+.zy-cartx .blockUI.blockOverlay, .zy-checkout .blockUI.blockOverlay { background: rgba(245, 236, 225, 0.6) !important; opacity: 1 !important; }
+
+/* Preporuke */
+.zy-recs { display: flex; flex-direction: column; gap: 24px; padding: 36px var(--zy-gutter) 64px; }
+.zy-recs__head { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.zy-recs__head h2 { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.zy-recs__dash { width: 40px; height: 3px; background: var(--zy-red); }
+.zy-recs__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 64px; }
+.zy-rec { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); column-gap: 28px; align-items: stretch; }
+.zy-rec__media { display: block; aspect-ratio: 1.55 / 1; overflow: hidden; background: #e9e1d6; }
+.zy-rec__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.zy-rec__body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 4px; }
+.zy-rec__body h3 { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.35; letter-spacing: 0.08em; text-transform: uppercase; }
+.zy-rec__body h3 a { text-decoration: none; }
+.zy-rec__desc { margin: 0; max-width: 300px; font-size: 14px; line-height: 1.5; color: rgba(10, 10, 10, 0.68); }
+.zy-rec__price {
+  margin: 6px 0 0;
+  font-family: var(--zy-font-wide); font-weight: 500; font-size: 20px; line-height: 1; letter-spacing: 0.02em;
+}
+.zy-rec__btn {
+  margin-top: 8px; height: 46px; padding: 0 40px; display: inline-flex; align-items: center;
+  background: var(--zy-taupe); color: var(--zy-white); border: none; border-radius: 0; cursor: pointer;
+  font-family: var(--zy-font-ui); font-size: 12px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
+  transition: background 200ms ease;
+}
+.zy-rec__btn:hover { background: var(--zy-taupe-dark); color: var(--zy-white); }
+.zy-rec__btn:disabled { opacity: 0.6; cursor: default; }
+
+/* ---------- Naplata ---------- */
+.zy-checkout {
+  display: grid; grid-template-columns: minmax(0, 62fr) minmax(0, 33fr); column-gap: 5%; align-items: start;
+  margin: 0; padding: 32px var(--zy-gutter) 72px;
+}
+.zy-step { padding: 28px 0; border-bottom: 1px solid var(--zy-line); }
+.zy-step:first-child { padding-top: 0; }
+.zy-step:last-child { border-bottom: none; padding-bottom: 0; }
+.zy-step__title {
+  margin: 0 0 18px; display: flex; align-items: center; gap: 14px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.zy-step__num {
+  width: 26px; height: 26px; border-radius: 50%; background: var(--zy-black); color: var(--zy-white);
+  display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; letter-spacing: 0;
+}
+.zy-step__fields {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 20px; row-gap: 14px;
+  padding-left: 40px;
+}
+
+.zy-checkout .form-row { margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.zy-checkout .form-row-wide { grid-column: 1 / -1; }
+.zy-checkout #billing_country_field { display: none; } /* samo Srbija; polje ostaje, ali se ne vidi */
+.zy-checkout .form-row label { font-size: 12px; color: rgba(10, 10, 10, 0.7); }
+.zy-checkout .form-row .required { text-decoration: none; color: inherit; }
+.zy-checkout .woocommerce-input-wrapper { display: block; }
+.zy-checkout .input-text {
+  width: 100%; height: 44px; padding: 0 14px;
+  border: 1px solid rgba(10, 10, 10, 0.22); border-radius: 0; background: rgba(255, 255, 255, 0.45);
+  color: var(--zy-ink); font-family: var(--zy-font-ui); font-size: 14px;
+  transition: border-color 200ms ease;
+}
+.zy-checkout textarea.input-text { height: auto; min-height: 84px; padding: 12px 14px; resize: vertical; }
+.zy-checkout .input-text::placeholder { color: rgba(10, 10, 10, 0.38); }
+.zy-checkout .input-text:hover { border-color: rgba(10, 10, 10, 0.45); }
+.zy-checkout .input-text:focus { outline: none; border-color: var(--zy-ink); }
+.zy-checkout .zy-has-error .input-text { border-color: rgba(215, 25, 32, 0.7); }
+.zy-field-error { font-size: 12px; line-height: 1.3; color: #b3171d; }
+/* WooCommerce ume i sam da ispise gresku ispod polja; mi vec ispisujemo svoju (flow.js), pa njegovu sakrivamo. */
+.zy-checkout .checkout-inline-error-message { display: none; }
+
+/* Opcije sa kruzicem: nacin dostave i nacin placanja */
+.zy-options { margin: 0 0 0 40px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.zy-option {
+  display: flex; align-items: center; gap: 16px; min-height: 58px; padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.4); border: 1px solid rgba(10, 10, 10, 0.18); cursor: pointer;
+  transition: border-color 200ms ease;
+}
+.zy-option:hover { border-color: rgba(10, 10, 10, 0.45); }
+.zy-option:has(input:checked) { border-color: var(--zy-ink); }
+.zy-option input[type="radio"] { width: 18px; height: 18px; margin: 0; accent-color: var(--zy-black); cursor: pointer; flex-shrink: 0; }
+.zy-option__text { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.zy-option__label { font-size: 14px; font-weight: 600; }
+.zy-option__note { font-size: 12px; color: var(--zy-ink-60); }
+.zy-option__price { font-size: 13px; font-weight: 600; white-space: nowrap; }
+/* Znakovi kartica (Visa, Mastercard, DinaCard...) u jednom redu. Dodatak banke im sam upisuje
+   razmak i visinu, pa to ovde gazimo sa !important da svi budu iste visine. */
+.zy-option__icon { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 6px 10px; flex-shrink: 0; }
+.zy-option__icon img { display: block; height: 18px; max-height: 18px !important; width: auto; margin: 0 !important; }
+.zy-option__icon span { display: none !important; }
+@media (max-width: 700px) {
+  /* Na telefonu znakovi kartica idu u svoj red ispod naziva, da tekst ne bude stisnut. */
+  .zy-option:has(.zy-option__icon) { flex-wrap: wrap; }
+  .zy-option__icon { flex-basis: 100%; justify-content: flex-start; padding-left: 34px; }
+}
+.zy-options__empty { margin: 0; font-size: 14px; color: var(--zy-ink-60); }
+.zy-checkout .payment_box { margin-top: 10px; padding: 14px 18px; background: rgba(255, 255, 255, 0.4); font-size: 13px; line-height: 1.5; }
+.zy-checkout .payment_box p { margin: 0; }
+.zy-checkout .woocommerce-terms-and-conditions-wrapper { margin-bottom: 14px; font-size: 12px; line-height: 1.5; }
+
+/* ---------- "Hvala" ---------- */
+.zy-thanks {
+  display: grid; grid-template-columns: minmax(0, 58fr) minmax(0, 37fr); column-gap: 5%; align-items: start;
+  padding: 28px var(--zy-gutter) 80px;
+}
+.zy-thanks__lead { display: flex; flex-direction: column; gap: 6px; }
+.zy-thanks__lead p { margin: 0; font-size: 14px; line-height: 1.5; color: rgba(10, 10, 10, 0.75); }
+.zy-thanks__lead p.zy-thanks__headline { font-size: 18px; font-weight: 600; line-height: 1.35; color: var(--zy-ink); }
+.zy-thanks__box {
+  margin-top: 24px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: 18px 28px; background: rgba(255, 255, 255, 0.45);
+}
+.zy-thanks__box > div { display: flex; flex-direction: column; gap: 8px; }
+.zy-thanks__box > div:first-child { padding-right: 28px; border-right: 1px solid rgba(10, 10, 10, 0.18); }
+.zy-thanks__box > div:last-child { padding-left: 28px; }
+.zy-thanks__k { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(10, 10, 10, 0.65); }
+.zy-thanks__number { font-family: var(--zy-font-wide); font-weight: 500; font-size: 22px; line-height: 1.1; letter-spacing: 0.03em; }
+.zy-thanks__date { font-size: 16px; line-height: 1.4; }
+.zy-thanks__retry { margin: 24px 0 0; }
+.zy-thanks__section { margin-top: 24px; padding-top: 22px; border-top: 1px solid rgba(10, 10, 10, 0.14); }
+.zy-thanks__box + .zy-thanks__section, .zy-thanks__retry + .zy-thanks__section { margin-top: 28px; }
+.zy-thanks__section h2 { margin: 0 0 14px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.zy-thanks__section dl { margin: 0; display: grid; grid-template-columns: 230px minmax(0, 1fr); row-gap: 10px; font-size: 14px; line-height: 1.5; }
+.zy-thanks__section dt { color: rgba(10, 10, 10, 0.7); }
+.zy-thanks__section dd { margin: 0; }
+.zy-thanks__section dd span { display: block; }
+.zy-thanks__section dd strong { font-weight: 600; }
+.zy-thanks__section dd .zy-thanks__note { margin-top: 4px; font-size: 12px; color: rgba(10, 10, 10, 0.55); }
+.zy-thanks__section > p { margin: 0 0 6px; font-size: 14px; line-height: 1.5; color: rgba(10, 10, 10, 0.75); }
+.zy-thanks__gateway:empty { display: none; }
+.zy-thanks__gateway { margin-top: 14px; font-size: 14px; line-height: 1.5; color: rgba(10, 10, 10, 0.75); }
+.zy-thanks__gateway p { margin: 0 0 6px; }
+
+/* ---------- Uzi ekrani (grubo; pravi mobilni dizajn stize u fazi 11) ---------- */
+@media (max-width: 1000px) {
+  .zy-cartx, .zy-checkout, .zy-thanks { grid-template-columns: minmax(0, 1fr); row-gap: 40px; }
+  .zy-summary--sticky { position: static; }
+  .zy-recs__grid { grid-template-columns: minmax(0, 1fr); row-gap: 40px; }
+}
+@media (max-width: 700px) {
+  .zy-cartx__cols { display: none; }
+  .zy-cartx__row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 14px; }
+  .zy-cartx__product { grid-column: 1 / -1; }
+  .zy-cartx__price { display: none; }
+  .zy-step__fields { grid-template-columns: minmax(0, 1fr); padding-left: 0; }
+  .zy-options { margin-left: 0; }
+  .zy-thanks__section dl { grid-template-columns: minmax(0, 1fr); row-gap: 2px; }
+  .zy-thanks__section dd { margin-bottom: 10px; }
+  .zy-rec { grid-template-columns: minmax(0, 1fr); row-gap: 16px; }
+}

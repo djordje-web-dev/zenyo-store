@@ -1,0 +1,330 @@
+/* ==========================================================================
+   ZENYO - osnovni stilovi: boje, fontovi, zaglavlje, futer, opsta stranica.
+   Stilovi pojedinacnih stranica (hero, shop, proizvod...) stizu u svojim fajlovima.
+   ========================================================================== */
+
+/* ---------- Font brenda ---------- */
+@font-face {
+  font-family: "Vito Wide";
+  src: url("../fonts/VitoWide-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Promenljive ---------- */
+:root {
+  /* Cetiri boje brenda (tokens.json). */
+  --zy-white: #ffffff;
+  --zy-gray: #c7c7c7;
+  --zy-red: #d71920;
+  --zy-black: #0a0a0a;
+
+  /* Radne boje iz dizajna prodavnice; nisu zvanicne boje brenda. */
+  --zy-sand: #f3e7d8;        /* podloga svetlih stranica */
+  --zy-paper: #faf7f2;       /* paneli preko podloge */
+  --zy-taupe: #86705c;       /* dugmad */
+  --zy-taupe-dark: #73604f;  /* dugmad na prelazak misem */
+
+  /* Tekst na svetloj podlozi, od najjaceg ka najslabijem. */
+  --zy-ink: #0a0a0a;
+  --zy-ink-85: rgba(10, 10, 10, 0.85);
+  --zy-ink-60: rgba(10, 10, 10, 0.6);
+  --zy-ink-35: rgba(10, 10, 10, 0.35);
+  --zy-line: rgba(10, 10, 10, 0.12);
+
+  --zy-font-wide: "Vito Wide", system-ui, sans-serif;            /* logo, naslovi, CART */
+  --zy-font-ui: "Albert Sans", system-ui, -apple-system, sans-serif; /* sve ostalo */
+
+  --zy-gutter: clamp(20px, 5.5vw, 80px); /* razmak od ivice ekrana */
+  --zy-header-h: 80px;
+}
+
+/* ---------- Osnova ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--zy-sand);
+  color: var(--zy-ink);
+  font-family: var(--zy-font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg, video { max-width: 100%; }
+a { color: inherit; }
+[hidden] { display: none !important; }
+
+:focus-visible { outline: 2px solid var(--zy-red); outline-offset: 3px; }
+
+/* Tekst samo za citace ekrana (npr. "ZENYO" uz logo koji je slika). */
+.screen-reader-text {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+.zy-skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  padding: 12px 16px; background: var(--zy-black); color: var(--zy-white);
+}
+.zy-skip:focus { left: 0; }
+
+/* ---------- Svetli deo stranice (Light Zenyo) ---------- */
+.zy-light {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5ece1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),
+    url("../img/bg-light.jpg");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+/* Stranice gde svetli deo staje tacno u jedan ekran (Shop Index, ZENYO): ispod je samo futer. */
+.zy-light--screen {
+  min-height: 0;
+  height: clamp(640px, 100vh, 900px);
+  overflow: hidden;
+}
+.zy-light--screen .zy-main { min-height: 0; }
+
+/* ---------- Logo ---------- */
+.zy-logo { display: block; height: auto; overflow: visible; }
+
+/* ---------- Zaglavlje ---------- */
+.zy-header {
+  height: var(--zy-header-h);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 var(--zy-gutter);
+}
+.zy-header--logo { height: 104px; }
+.zy-header--none { height: 72px; }
+
+.zy-header__left { min-width: 0; }
+.zy-header__logo { display: flex; align-items: center; height: 44px; }
+.zy-header__right { display: flex; align-items: center; gap: 18px; margin-left: auto; }
+.zy-header__logo--mobile { display: none; }
+
+/* Izbor jezika: SR | EN */
+.zy-lang { display: flex; align-items: center; margin-right: 6px; }
+.zy-lang__item {
+  display: flex; align-items: center; height: 44px; padding: 0 7px;
+  font-size: 12px; font-weight: 600; line-height: 1; letter-spacing: 0.14em;
+  color: var(--zy-ink-60); text-decoration: none;
+}
+.zy-lang__item + .zy-lang__item { position: relative; }
+.zy-lang__item + .zy-lang__item::before {
+  content: ""; position: absolute; left: 0; top: 50%; width: 1px; height: 11px; margin-top: -5.5px;
+  background: currentColor; opacity: 0.35;
+}
+.zy-lang__item.is-current { color: var(--zy-ink); }
+a.zy-lang__item:hover { color: var(--zy-ink); }
+
+.zy-subhead { padding: 0 var(--zy-gutter); }
+
+/* Putanja "Shop / ..." */
+.zy-crumbs ol {
+  margin: 0; padding: 0; list-style: none;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px;
+  font-size: 12px; font-weight: 600; line-height: 1;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.zy-crumbs a {
+  display: inline-flex; align-items: center; min-height: 44px;
+  text-decoration: none; color: var(--zy-ink-60);
+  transition: color 200ms ease;
+}
+.zy-crumbs a:hover { color: var(--zy-ink); }
+.zy-crumbs__sep { color: var(--zy-ink-35); }
+.zy-crumbs__current { color: var(--zy-ink-85); }
+
+/* Dugme-ikonica (slusalica) */
+.zy-icon-btn {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; background: none; border: none; color: var(--zy-ink); cursor: pointer;
+}
+
+/* Panel sa brojem telefona */
+.zy-phone { position: relative; }
+.zy-phone__panel {
+  position: absolute; top: 52px; left: 50%; transform: translateX(-50%); z-index: 60;
+  width: 248px;
+  display: flex; flex-direction: column; gap: 14px;
+  padding: 18px 20px 20px;
+  background: var(--zy-paper);
+  border: 1px solid var(--zy-line);
+}
+.zy-phone__label {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--zy-ink-60);
+}
+.zy-phone__number {
+  font-size: 19px; font-weight: 600; line-height: 1.2;
+  color: var(--zy-ink); text-decoration: none;
+}
+
+/* Korpa: "CART (0)" + kesa */
+.zy-cart {
+  display: flex; align-items: center; gap: 16px; height: 44px;
+  text-decoration: none; color: var(--zy-ink);
+}
+.zy-cart__text {
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 13px; line-height: 1; letter-spacing: 0.16em; text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ---------- Dugmad ---------- */
+.zy-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 28px;
+  background: var(--zy-taupe); color: var(--zy-white);
+  border: none; border-radius: 0; cursor: pointer;
+  font-family: var(--zy-font-ui); font-size: 14px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+  transition: background 200ms ease;
+}
+.zy-btn:hover { background: var(--zy-taupe-dark); color: var(--zy-white); }
+.zy-btn--small { min-height: 44px; padding: 0 16px; font-size: 13px; }
+
+/* ---------- Opsta stranica ---------- */
+.zy-main { flex: 1; display: flex; flex-direction: column; }
+
+.zy-content {
+  width: 100%; max-width: 860px;
+  padding: 24px var(--zy-gutter) 96px;
+}
+.zy-content--wide { max-width: none; }
+
+/* Naslov sa crvenom crticom */
+.zy-title {
+  margin: 0 0 40px;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 26px; line-height: 1.2; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.zy-title::after {
+  content: ""; display: block;
+  width: 40px; height: 4px; margin-top: 16px;
+  background: var(--zy-red);
+}
+
+.zy-prose { font-size: 16px; line-height: 1.65; }
+.zy-prose > *:first-child { margin-top: 0; }
+.zy-prose a { text-underline-offset: 3px; }
+
+/* ---------- Futer (Dark Zenyo) ---------- */
+.zy-footer {
+  background: var(--zy-black);
+  color: var(--zy-white);
+  padding: 64px var(--zy-gutter) 26px;
+}
+.zy-footer a { text-decoration: none; transition: color 200ms ease; }
+.zy-footer :focus-visible { outline-offset: 4px; }
+
+.zy-footer__top {
+  display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between;
+  gap: 64px;
+}
+
+.zy-footer__brand {
+  flex: 1 1 360px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 32px;
+}
+.zy-footer__logo { display: block; line-height: 0; }
+.zy-footer__slogan {
+  margin: 0; display: flex; flex-direction: column; gap: 6px;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 12px; line-height: 1.5; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--zy-gray);
+}
+.zy-footer__about { display: inline-flex; flex-direction: column; gap: 8px; color: var(--zy-white); }
+.zy-footer__about-text {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.02em;
+}
+.zy-footer__about-text svg { transition: transform 300ms ease; }
+.zy-footer__about-dash {
+  display: block; width: 18px; height: 2px; background: var(--zy-red);
+  transition: width 300ms ease;
+}
+.zy-footer__about:hover .zy-footer__about-dash { width: 100%; }
+.zy-footer__about:hover svg { transform: translateX(5px); }
+
+.zy-footer__cols { flex: 0 1 auto; display: flex; flex-wrap: wrap; gap: 72px; padding-top: 4px; }
+.zy-footer__col { min-width: 150px; display: flex; flex-direction: column; gap: 18px; }
+.zy-footer__col h2 {
+  margin: 0;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 11px; line-height: 1; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.zy-footer__col ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.zy-footer__col a { font-size: 15px; line-height: 1.5; color: var(--zy-gray); }
+.zy-footer__col a:hover { color: var(--zy-white); }
+
+.zy-footer__bottom {
+  margin-top: 48px; padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between;
+  gap: 16px 32px;
+  font-size: 12px; line-height: 1.5; letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.6);
+}
+.zy-footer__bottom address { font-style: normal; display: flex; flex-direction: column; gap: 6px; }
+.zy-footer__row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; }
+.zy-footer__sep { color: rgba(255, 255, 255, 0.28); }
+.zy-footer__bottom a { color: rgba(255, 255, 255, 0.6); }
+.zy-footer__bottom a:hover { color: var(--zy-white); }
+.zy-footer__instagram { display: inline-flex; align-items: center; gap: 10px; }
+
+/* ---------- Tablet i telefon ----------
+   Mobilni dizajn ne postoji; ovo je izvedeno iz desktop dizajna (isti fontovi, boje i razmaci u manjoj meri). */
+@media (max-width: 900px) {
+  .zy-footer__top { gap: 40px; }
+  .zy-footer__cols { gap: 40px; }
+}
+@media (max-width: 700px) {
+  :root { --zy-header-h: 64px; }
+  /* Zaglavlje u dva reda: gore logo, jezik, telefon i korpa; ispod putanja "Shop / ...". */
+  .zy-header, .zy-header--logo, .zy-header--none {
+    height: auto; min-height: var(--zy-header-h); flex-wrap: wrap; gap: 0 12px; padding-top: 10px;
+  }
+  .zy-header__left { display: contents; }
+  .zy-header__logo, .zy-header__logo--mobile { display: flex; order: 1; }
+  .zy-header__logo .zy-logo { width: 104px !important; }
+  .zy-header__right { order: 2; gap: 2px; }
+  .zy-header .zy-crumbs { order: 3; flex-basis: 100%; padding: 6px 0 10px; }
+  .zy-subhead { padding-bottom: 10px; }
+  .zy-crumbs ol { flex-wrap: wrap; row-gap: 2px; }
+  .zy-lang { margin-right: 0; }
+  .zy-lang__item { padding: 0 6px; }
+  .zy-cart { gap: 6px; }
+  .zy-cart__text { font-size: 12px; letter-spacing: 0.1em; }
+  .zy-phone__panel { position: fixed; left: 16px; right: 16px; top: 62px; width: auto; transform: none; }
+  .zy-title { font-size: 26px; }
+  .zy-content { padding-bottom: 64px; }
+  .zy-footer { padding-top: 48px; }
+  .zy-footer__cols { gap: 32px 48px; }
+  .zy-footer__bottom { margin-top: 36px; }
+}
+@media (max-width: 480px) {
+  /* Na uskom telefonu ostaje samo broj u korpi: "(3)". */
+  .zy-cart__word { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+
+/* ---------- Bez animacija za one koji su ih iskljucili u sistemu ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

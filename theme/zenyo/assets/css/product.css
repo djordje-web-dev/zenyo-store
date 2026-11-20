@@ -1,0 +1,286 @@
+/* ==========================================================================
+   Stranica proizvoda (dizajn: stranice kimona).
+   Napomena: WooCommerce ima pravilo "img { height: auto }", zato su pravila za slike
+   pisana preciznije (npr. ".zy-gallery img.zy-gallery__img").
+   ========================================================================== */
+
+.zy-product { display: flex; flex-direction: column; }
+
+.zy-product__top {
+  display: grid;
+  grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
+  column-gap: clamp(40px, 5vw, 88px);
+  align-items: start;
+  padding: 12px var(--zy-gutter) 72px;
+}
+
+/* ---------- Galerija ---------- */
+.zy-gallery { display: flex; align-items: flex-start; gap: 16px; min-width: 0; }
+
+.zy-gallery__thumbs { width: 84px; flex-shrink: 0; display: flex; flex-direction: column; gap: 12px; }
+.zy-gallery__thumb {
+  position: relative; width: 84px; height: 100px; padding: 0; overflow: hidden;
+  background: #f3eee7; border: 1px solid var(--zy-line); border-radius: 0; cursor: pointer;
+  transition: border-color 200ms ease;
+}
+.zy-gallery__thumb:hover { border-color: rgba(10, 10, 10, 0.4); }
+.zy-gallery__thumb[aria-pressed="true"] { border-color: var(--zy-ink); }
+.zy-gallery__thumb img {
+  position: absolute; inset: 0; width: 100%; height: 100% !important;
+  object-fit: cover; display: block; max-width: none;
+}
+
+.zy-gallery__main {
+  position: relative; flex-grow: 1; min-width: 0; height: 680px; overflow: hidden;
+  background-color: #f3eee7;
+}
+.zy-gallery img.zy-gallery__img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; max-width: none;
+}
+.zy-gallery__zoom {
+  position: absolute; right: 0; bottom: 0; width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center; padding: 0;
+  background: var(--zy-white); color: var(--zy-ink); border: none; border-radius: 0; cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+.zy-gallery__zoom:hover { background: var(--zy-black); color: var(--zy-white); }
+
+/* ---------- Kolona za kupovinu ---------- */
+.zy-buy { min-width: 0; display: flex; flex-direction: column; gap: 26px; padding-top: 2px; }
+
+.zy-buy__head { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.zy-buy__title {
+  margin: 0; max-width: 13em;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: clamp(24px, 2.1vw, 30px); line-height: 1.22;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.zy-buy__dash { width: 40px; height: 3px; background: var(--zy-red); }
+
+.zy-buy__spec {
+  margin: 0;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.zy-buy__desc { max-width: 460px; font-size: 15px; line-height: 1.6; color: var(--zy-ink-60); }
+.zy-buy__desc p { margin: 0; }
+
+/* Izbor: boja, velicina... */
+.zy-choice { display: flex; flex-direction: column; gap: 12px; }
+.zy-choice__head { display: flex; align-items: baseline; gap: 12px; }
+.zy-choice__label {
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+}
+.zy-choice__value { font-size: 13px; color: rgba(10, 10, 10, 0.62); }
+.zy-choice__options { display: flex; flex-wrap: wrap; gap: 10px; }
+.zy-choice__options--colour { gap: 12px; }
+
+.zy-swatch {
+  width: 104px; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 12px 0 9px;
+  background: rgba(255, 255, 255, 0.45); border: 1px solid rgba(10, 10, 10, 0.14); border-radius: 0;
+  cursor: pointer; font-family: var(--zy-font-ui); font-size: 13px; color: var(--zy-ink);
+  transition: border-color 200ms ease;
+}
+.zy-swatch:hover:not(:disabled) { border-color: rgba(10, 10, 10, 0.45); }
+.zy-swatch[aria-pressed="true"] { border-color: var(--zy-ink); }
+.zy-swatch__chip { width: 44px; height: 28px; border: 1px solid rgba(10, 10, 10, 0.18); }
+
+.zy-size {
+  min-width: 72px; height: 48px; padding: 0 12px;
+  background: rgba(255, 255, 255, 0.45); border: 1px solid rgba(10, 10, 10, 0.2); border-radius: 0;
+  cursor: pointer; font-family: var(--zy-font-ui); font-size: 14px; color: var(--zy-ink);
+  transition: border-color 200ms ease;
+}
+.zy-size:hover:not(:disabled) { border-color: rgba(10, 10, 10, 0.55); }
+.zy-size[aria-pressed="true"] { border: 1.5px solid var(--zy-ink); }
+
+/* Nedostupno: isprekidan okvir, precrtano, ne moze da se klikne. */
+.zy-size:disabled, .zy-swatch:disabled {
+  background: rgba(255, 255, 255, 0.2); border: 1px dashed rgba(10, 10, 10, 0.22);
+  color: rgba(10, 10, 10, 0.38); text-decoration: line-through; cursor: not-allowed;
+}
+.zy-swatch:disabled .zy-swatch__chip { opacity: 0.35; }
+
+/* Tekstualni link sa strelicom ("Size guide ->") */
+.zy-textlink {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 10px;
+  min-height: 32px; padding: 0; background: none; border: none; cursor: pointer;
+  font-family: var(--zy-font-ui); font-size: 14px; color: rgba(10, 10, 10, 0.8);
+  text-decoration: underline; text-underline-offset: 4px;
+  transition: color 200ms ease;
+}
+.zy-textlink svg { transition: transform 300ms ease; }
+.zy-textlink:hover { color: var(--zy-ink); }
+.zy-textlink:hover svg { transform: translateX(4px); }
+
+/* Cena i dugme */
+.zy-buy__action { display: flex; flex-direction: column; gap: 16px; padding-top: 4px; }
+.zy-buy__price {
+  margin: 0;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 28px; line-height: 1; letter-spacing: 0.04em;
+}
+.zy-buy__add {
+  width: 100%; height: 56px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 14px; padding: 0;
+  background: var(--zy-taupe); color: var(--zy-white); border: none; border-radius: 0; cursor: pointer;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+  transition: background 200ms ease;
+}
+.zy-buy__add:hover:not(:disabled) { background: var(--zy-taupe-dark); }
+.zy-buy__add:disabled { opacity: 0.6; cursor: default; }
+.zy-buy__status { margin: 0; min-height: 20px; font-size: 13px; line-height: 1.5; color: rgba(10, 10, 10, 0.7); }
+.zy-buy__status.is-error { color: var(--zy-ink); }
+.zy-buy__meta {
+  margin: -10px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px;
+  font-size: 13px; color: rgba(10, 10, 10, 0.62);
+}
+.zy-buy__meta a { text-decoration: none; transition: color 200ms ease; }
+.zy-buy__meta a:hover { color: var(--zy-ink); }
+.zy-buy__meta span { color: rgba(10, 10, 10, 0.3); }
+
+/* ---------- Sekcije koje se otvaraju ---------- */
+.zy-acc { padding: 8px var(--zy-gutter) 96px; }
+.zy-acc__item { border-bottom: 1px solid rgba(10, 10, 10, 0.16); }
+.zy-acc__item:first-child { border-top: 1px solid rgba(10, 10, 10, 0.16); }
+.zy-acc summary {
+  min-height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  cursor: pointer; list-style: none; color: rgba(10, 10, 10, 0.9);
+}
+.zy-acc summary::-webkit-details-marker { display: none; }
+.zy-acc summary:hover { color: var(--zy-ink); }
+.zy-acc summary h2 {
+  margin: 0;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase;
+}
+/* Plus koji postaje minus kad se sekcija otvori. */
+.zy-acc summary::after {
+  content: ""; width: 16px; height: 16px; flex-shrink: 0;
+  background:
+    linear-gradient(currentColor, currentColor) center / 14px 1.25px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1.25px 14px no-repeat;
+}
+.zy-acc__item[open] summary::after { background: linear-gradient(currentColor, currentColor) center / 14px 1.25px no-repeat; }
+.zy-acc__body {
+  display: flex; flex-direction: column; gap: 10px; max-width: 760px; padding: 0 0 30px;
+  font-size: 15px; line-height: 1.6; color: rgba(10, 10, 10, 0.72);
+}
+.zy-acc__body p { margin: 0; }
+.zy-acc__body strong { font-weight: 400; color: var(--zy-ink); }
+
+/* ---------- Paneli ---------- */
+.zy-dialog { border: none; padding: 0; color: var(--zy-ink); max-width: none; max-height: none; }
+.zy-dialog::backdrop { background: rgba(10, 10, 10, 0.28); }
+
+.zy-dialog__close {
+  width: 44px; height: 44px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; padding: 0;
+  background: none; color: var(--zy-ink); border: 1px solid rgba(10, 10, 10, 0.16); border-radius: 0; cursor: pointer;
+}
+
+/* Uvecana slika: preko celog ekrana. */
+.zy-dialog--zoom { width: 100vw; height: 100vh; background: rgba(247, 243, 237, 0.97); }
+.zy-dialog--zoom[open] { display: flex; align-items: center; justify-content: center; }
+.zy-dialog--zoom img { width: min(1100px, 86vw); height: 86vh !important; object-fit: contain; display: block; max-width: none; }
+.zy-dialog__close--corner { position: absolute; top: 24px; right: 24px; width: 52px; height: 52px; background: var(--zy-white); }
+
+/* Tabela velicina: panel sa desne strane. */
+.zy-dialog--side {
+  margin: 0 0 0 auto; width: min(560px, 92vw); height: 100vh;
+  padding: 40px 44px 48px; background: var(--zy-paper); overflow-y: auto;
+}
+.zy-dialog--side[open] { display: flex; flex-direction: column; gap: 28px; }
+.zy-dialog__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
+.zy-dialog__head h2 {
+  margin: 0 0 14px;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 18px; letter-spacing: 0.14em; text-transform: uppercase;
+}
+.zy-dialog__dash { width: 32px; height: 3px; background: var(--zy-red); }
+.zy-dialog__body { font-size: 15px; line-height: 1.6; color: rgba(10, 10, 10, 0.7); }
+.zy-dialog__body p { margin: 0 0 20px; }
+.zy-dialog__body table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 0 0 24px; }
+.zy-dialog__body thead th {
+  padding: 0 0 12px; text-align: left;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(10, 10, 10, 0.7); border-bottom: 1px solid rgba(10, 10, 10, 0.2);
+}
+.zy-dialog__body tbody th, .zy-dialog__body tbody td {
+  padding: 14px 0; text-align: left; border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+}
+.zy-dialog__body tbody th { font-weight: 600; color: var(--zy-ink); }
+.zy-dialog__body tbody td { color: rgba(10, 10, 10, 0.55); }
+
+/* ---------- Vise proizvoda na jednoj stranici (Belts) ---------- */
+.zy-stack__head {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
+  padding: 20px var(--zy-gutter) 44px;
+}
+.zy-stack__items { display: flex; flex-direction: column; padding: 0 var(--zy-gutter); }
+.zy-stack__item {
+  display: grid;
+  grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
+  column-gap: clamp(40px, 5vw, 88px);
+  align-items: start;
+  padding: 64px 0;
+  border-top: 1px solid rgba(10, 10, 10, 0.14);
+}
+.zy-stack__item:first-child { padding-top: 0; border-top: none; }
+.zy-stack__item:last-child { padding-bottom: 40px; }
+.zy-stack__media { position: relative; height: 560px; overflow: hidden; background-color: #f3eee7; }
+.zy-stack__media img {
+  position: absolute; inset: 0; width: 100%; height: 100% !important;
+  object-fit: cover; display: block; max-width: none;
+}
+.zy-stack__foot {
+  display: grid;
+  grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
+  column-gap: clamp(40px, 5vw, 88px);
+  padding: 0 var(--zy-gutter) 96px;
+}
+.zy-stack__foot .zy-buy__meta { margin: 0; }
+
+/* Boje kao redovi sa trakicom (pojasevi): tri u redu. */
+.zy-choice__options--colour-row {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; max-width: 480px;
+}
+.zy-swatch--row {
+  width: auto; height: 48px; flex-direction: row; align-items: center; gap: 12px;
+  padding: 0 14px; font-size: 14px; text-align: left;
+}
+.zy-swatch--row .zy-swatch__chip { width: 30px; height: 12px; flex-shrink: 0; }
+
+/* ---------- Tablet i telefon (izvedeno iz desktop dizajna; mobilni dizajn ne postoji) ---------- */
+@media (max-width: 1000px) {
+  /* Tablet: slika i kupovina ostaju jedno pored drugog, samo uze. */
+  .zy-product__top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 32px; }
+  .zy-gallery { flex-direction: column-reverse; }
+  .zy-gallery__thumbs { width: auto; flex-direction: row; flex-wrap: wrap; }
+  .zy-gallery__main { width: 100%; height: auto; aspect-ratio: 4 / 5; }
+}
+@media (max-width: 900px) {
+  .zy-stack__item, .zy-stack__foot { grid-template-columns: minmax(0, 1fr); row-gap: 32px; }
+  .zy-stack__media { height: auto; aspect-ratio: 4 / 3; }
+  .zy-stack__foot > span { display: none; }
+  .zy-dialog--side { padding: 28px 24px 32px; }
+}
+@media (max-width: 700px) {
+  .zy-product__top { grid-template-columns: minmax(0, 1fr); row-gap: 32px; padding-bottom: 48px; }
+  /* Tabela velicina: ako je sira od ekrana, klizi se levo-desno unutar panela. */
+  .zy-dialog--side { width: 100vw; padding: 24px 20px 32px; }
+  .zy-dialog__body table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .zy-dialog__body thead th, .zy-dialog__body tbody th, .zy-dialog__body tbody td { padding-right: 18px; white-space: nowrap; }
+  .zy-dialog--zoom img { width: 94vw; }
+  .zy-dialog__close--corner { top: 12px; right: 12px; }
+  .zy-choice__options--colour-row { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; }
+  .zy-swatch--row { padding: 0 12px; gap: 10px; min-width: 0; }
+  .zy-swatch--row span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .zy-size { min-width: 64px; }
+  .zy-buy__add { width: 100%; }
+}

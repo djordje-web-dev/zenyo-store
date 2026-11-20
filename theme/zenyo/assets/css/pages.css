@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Informativne stranice: About, FAQ, Contact, Shipping & Returns, pravne stranice.
+   ========================================================================== */
+
+/* ---------- Tekst stranice ---------- */
+.zy-prose h2 {
+  margin: 44px 0 14px;
+  font-size: 13px; font-weight: 600; line-height: 1.4; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.zy-prose h3 { margin: 28px 0 10px; font-size: 15px; font-weight: 600; line-height: 1.4; }
+.zy-prose p, .zy-prose li { font-size: 15px; line-height: 1.65; color: rgba(10, 10, 10, 0.75); }
+.zy-prose p { margin: 0 0 14px; }
+.zy-prose ul, .zy-prose ol { margin: 0 0 14px; padding-left: 20px; }
+.zy-prose li { margin-bottom: 6px; }
+.zy-prose strong { font-weight: 600; color: var(--zy-ink); }
+.zy-prose a { color: var(--zy-ink); text-decoration: underline; text-underline-offset: 3px; }
+.zy-prose a:hover { color: rgba(10, 10, 10, 0.7); }
+.zy-prose table { width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 15px; }
+.zy-prose th, .zy-prose td { padding: 12px 0; text-align: left; vertical-align: top; border-bottom: 1px solid var(--zy-line); line-height: 1.5; }
+.zy-prose th { width: 230px; font-weight: 400; color: rgba(10, 10, 10, 0.7); }
+.zy-prose td { color: var(--zy-ink); }
+.zy-prose .zy-note { font-size: 13px; color: var(--zy-ink-60); }
+/* Uokviren tekst, npr. obrazac za odustanak. */
+.zy-prose .zy-form {
+  margin: 0 0 20px; padding: 20px 24px; background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(10, 10, 10, 0.1);
+}
+.zy-prose .zy-form p:last-child { margin-bottom: 0; }
+
+/* ---------- Kutije sa strane (kontakt, brzi linkovi) ---------- */
+.zy-box { padding: 22px 24px 24px; background: rgba(255, 255, 255, 0.5); border: 1px solid rgba(10, 10, 10, 0.1); }
+.zy-box h2 { margin: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.zy-box__dash { width: 32px; height: 3px; margin-top: 10px; background: var(--zy-red); }
+.zy-box > p { margin: 14px 0 18px; font-size: 14px; color: rgba(10, 10, 10, 0.72); }
+.zy-box__contacts { margin: 0; display: grid; grid-template-columns: 84px minmax(0, 1fr); row-gap: 10px; font-size: 14px; }
+.zy-box__contacts dt { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(10, 10, 10, 0.55); line-height: 21px; }
+.zy-box__contacts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.zy-box__contacts a { color: var(--zy-ink); text-decoration: underline; text-underline-offset: 3px; }
+.zy-box__contacts a:hover { color: rgba(10, 10, 10, 0.7); }
+.zy-box__btn {
+  margin-top: 20px; height: 50px; display: flex; align-items: center; justify-content: center;
+  background: var(--zy-taupe); color: var(--zy-white); text-decoration: none;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+  transition: background 200ms ease;
+}
+.zy-box__btn:hover { background: var(--zy-taupe-dark); color: var(--zy-white); }
+.zy-box__links { margin: 14px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.zy-box__links a {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 40px;
+  font-size: 14px; color: var(--zy-ink); text-decoration: none; border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+}
+.zy-box__links svg { transition: transform 250ms ease; }
+.zy-box__links a:hover svg { transform: translateX(3px); }
+
+/* ---------- FAQ ---------- */
+.zy-faq__intro {
+  display: grid; grid-template-columns: minmax(0, 38fr) minmax(0, 62fr); column-gap: 40px; align-items: center;
+  min-height: 280px; padding: 0 var(--zy-gutter);
+}
+.zy-faq__lead { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 8px 0 24px; }
+.zy-faq__lead h1 {
+  margin: 0;
+  font-family: var(--zy-font-wide); font-weight: 500;
+  font-size: 30px; line-height: 1.1; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.zy-faq__dash { width: 48px; height: 4px; background: var(--zy-red); }
+.zy-faq__lead p { margin: 6px 0 0; max-width: 400px; font-size: 15px; line-height: 1.6; color: rgba(10, 10, 10, 0.72); }
+/* Slika se sa leve strane postepeno gubi u pozadini. */
+.zy-faq__hero {
+  height: 280px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%);
+  mask-image: linear-gradient(to right, transparent 0, #000 22%);
+}
+.zy-faq__hero img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
+
+.zy-faq__body {
+  display: grid; grid-template-columns: minmax(0, 69fr) minmax(0, 27fr); column-gap: 4%; align-items: start;
+  padding: 36px var(--zy-gutter) 80px;
+}
+.zy-faq__side { display: flex; flex-direction: column; gap: 20px; }
+
+.zy-faq__list { border-top: 1px solid rgba(10, 10, 10, 0.14); }
+.zy-faq__list details { border-bottom: 1px solid rgba(10, 10, 10, 0.14); }
+.zy-faq__list summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  min-height: 56px; padding: 16px 0; cursor: pointer; list-style: none;
+  font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--zy-ink);
+}
+.zy-faq__list summary::-webkit-details-marker { display: none; }
+.zy-faq__list summary:hover { color: rgba(10, 10, 10, 0.75); }
+/* Strelica koja se okrene kad se pitanje otvori. */
+.zy-faq__list summary::after {
+  content: ""; flex-shrink: 0; width: 9px; height: 9px; margin-right: 4px;
+  border-right: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor;
+  transform: translateY(-3px) rotate(45deg); transition: transform 250ms ease;
+}
+.zy-faq__list details[open] summary::after { transform: translateY(2px) rotate(-135deg); }
+.zy-faq__list details > *:not(summary) { max-width: 640px; margin: 0 48px 8px 0; font-size: 14px; line-height: 1.65; color: rgba(10, 10, 10, 0.72); }
+.zy-faq__list details > *:last-child { margin-bottom: 20px; }
+.zy-faq__list details a { color: var(--zy-ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- Uzi ekrani (grubo; pravi mobilni dizajn stize u fazi 11) ---------- */
+@media (max-width: 900px) {
+  .zy-faq__intro { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .zy-faq__hero { height: 200px; -webkit-mask-image: none; mask-image: none; margin-bottom: 8px; }
+  .zy-faq__body { grid-template-columns: minmax(0, 1fr); row-gap: 40px; }
+  .zy-faq__list details > *:not(summary) { margin-right: 0; }
+  .zy-prose th { width: 40%; }
+}
